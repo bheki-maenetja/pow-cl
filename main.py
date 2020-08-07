@@ -7,16 +7,17 @@ def main():
 
   HOW IT WORKS
   ------------
-  1) Facilitates the functionality of the search tool
+  1) Facilitates the functionality of the search & comparison tools
   2) Provides the user interface
   """
   input("Welcome to POW!!! Your #1 place for all things superhero >>> ")
   user_prompts = {
-    "general": "To explore your favourite superheroes, press 'e'. If you want to search for a particular hero press 's'. Or you can check out our nifty comparison tool; just press 'c'. To quit press 'q'"
+    "general": "To explore your favourite superheroes, press 'e'. If you want to search for a particular hero press 's'. Or you can check out our nifty comparison tool; just press 'c'. To quit press 'q'",
+    "general-error": "Please enter a valid input"
   }
 
   while True:
-    user_input = get_string(1,1, user_prompts["general"], "Please enter a valid input", accept_values=['e', 's', 'c', 'q'])
+    user_input = get_string(1,1, user_prompts["general"], user_prompts["general-error"], accept_values=['e', 's', 'c', 'q'])
     if user_input == 'q':
       break
     elif user_input == 'e':
@@ -27,7 +28,6 @@ def main():
       input("<COMPARISON TOOL/>")
   
   input("Thank you for using POW!!! >>> ")
-
 
 if __name__ == "__main__":
     main()
