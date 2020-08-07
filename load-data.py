@@ -12,7 +12,9 @@ for i in json_data:
     appearance['height'] = f"{appearance['height'][1]} ({appearance['height'][0]})" 
     appearance['weight'] = f"{appearance['weight'][1]} ({appearance['weight'][0]})"
     appearance['eye_colour'] = appearance['eyeColor']
+    appearance['hair_colour'] = appearance['hairColor'] if appearance['hairColor'] != "No Hair" else "n/a"
     del appearance['eyeColor']
+    del appearance['hairColor']
 
 
 for i in json_data:
