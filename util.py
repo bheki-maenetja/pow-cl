@@ -11,15 +11,16 @@ def get_integer(min_value, max_value, input_prompt):
   
   return number
 
-def get_string(min_length, max_length, input_prompt, accept_values=None):
+def get_string(min_length, max_length, input_prompt, error_prompt,accept_values=None):
+  user_error = False
   while True:
     try:
-      string = input(f"{input_prompt}: ").lower()
+      string = input(f"{input_prompt if not user_error else error_prompt}: ").lower()
       if accept_values != None:
         if string not in accept_values: raise ValueError
       if len(string) > max_length or len(string) < min_length: raise ValueError
     except ValueError:
-      pass
+      user_error = True
     else:
       break
   

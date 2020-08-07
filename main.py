@@ -16,7 +16,7 @@ def main():
   }
 
   while True:
-    user_input = get_string(1,1, user_prompts["general"], accept_values=['e', 's', 'c', 'q'])
+    user_input = get_string(1,1, user_prompts["general"], "Please enter a valid input", accept_values=['e', 's', 'c', 'q'])
     if user_input == 'q':
       break
     elif user_input == 'e':
@@ -27,3 +27,7 @@ def main():
       print("<COMPARISON TOOL/>")
   
   input("Thank you for using POW!!! >>> ")
+
+
+if __name__ == "__main__":
+    main()
