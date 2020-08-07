@@ -20,11 +20,11 @@ def main():
     if user_input == 'q':
       break
     elif user_input == 'e':
-      print("<EXPLORE HEROES/>")
+      input("<EXPLORE HEROES/>")
     elif user_input == 's':
-      print("<SEARCH FOR HERO/>")
+      input("<SEARCH FOR HERO/>")
     elif user_input == 'c':
-      print("<COMPARISON TOOL/>")
+      input("<COMPARISON TOOL/>")
   
   input("Thank you for using POW!!! >>> ")
 
