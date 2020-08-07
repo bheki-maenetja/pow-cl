@@ -19,5 +19,4 @@ for i in json_data:
 
 for i in json_data:
   print(i)
-  print(json_data[i])
-  print()
+  print(json_data[i], end="\n\n")
