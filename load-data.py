@@ -1,7 +1,8 @@
 import requests
 import json
+import re
 
-api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/1.json"
+api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/29.json"
 
 data = requests.get(api_url)
 json_data = data.json()
@@ -15,7 +16,7 @@ for i in json_data:
     appearance['hair_colour'] = appearance['hairColor'] if appearance['hairColor'] != "No Hair" else "n/a"
     del appearance['eyeColor'], appearance['hairColor']
 
-    json_data[i] = { key : appearance[key].lower() for key in appearance }
+    json_data[i] = { key : appearance[key].lower() if appearance[key] else "n/a" for key in appearance }
   elif i == 'biography':
     biography = json_data[i].copy()
     biography['full_name'] = biography['fullName'] if biography['fullName'] else "n/a"
@@ -26,6 +27,12 @@ for i in json_data:
     del biography['fullName'], biography['placeOfBirth'], biography['firstAppearance'], biography['alterEgos']
 
     json_data[i] = { key : biography[key].lower() if key != 'aliases' else biography[key] for key in biography }
+  elif i == 'work':
+    work = json_data[i].copy()
+    work['occupation'] = re.split(',|_|-|!|;', work['occupation']) if work['occupation'] != '-' else 'n/a'
+    work['base'] = work['base'].lower() if work['base'] != "-" else "n/a"
+
+    json_data[i] = { key: work[key] for key in work }
 
 
 for i in json_data:
