@@ -1,7 +1,7 @@
 import requests
 import json
 
-api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/208.json"
+api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/1.json"
 
 data = requests.get(api_url)
 json_data = data.json()
@@ -24,6 +24,8 @@ for i in json_data:
     biography['alter_egos'] = biography['alterEgos'] if biography['alterEgos'] != "No alter egos found." else "n/a"
     biography['aliases'] = [alias.lower() for alias in biography['aliases'] if alias != '-']
     del biography['fullName'], biography['placeOfBirth'], biography['firstAppearance'], biography['alterEgos']
+
+    json_data[i] = { key : biography[key].lower() if key != 'aliases' else biography[key] for key in biography }
 
 
 for i in json_data:
