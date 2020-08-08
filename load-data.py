@@ -29,7 +29,7 @@ for i in json_data:
     json_data[i] = { key : biography[key].lower() if key != 'aliases' else biography[key] for key in biography }
   elif i == 'work':
     work = json_data[i].copy()
-    work['occupation'] = re.split(',|_|-|!|;', work['occupation']) if work['occupation'] != '-' else 'n/a'
+    work['occupation'] = [word.strip().lower() for word in re.split(',|_|-|!|;', work['occupation'])] if work['occupation'] != '-' else 'n/a'
     work['base'] = work['base'].lower() if work['base'] != "-" else "n/a"
 
     json_data[i] = { key: work[key] for key in work }
