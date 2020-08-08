@@ -1,7 +1,7 @@
 import requests
 import json
 
-api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/167.json"
+api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/1.json"
 
 data = requests.get(api_url)
 json_data = data.json()
@@ -15,6 +15,13 @@ for i in json_data:
     appearance['hair_colour'] = appearance['hairColor'] if appearance['hairColor'] != "No Hair" else "n/a"
     del appearance['eyeColor']
     del appearance['hairColor']
+
+    for key in appearance:
+      appearance[key] = appearance[key].lower()
+  elif i == 'biography':
+    biography = json_data[i]
+    biography['full_name'] = biography['fullName'] if biography['fullName'] else "n/a"
+    del biography['fullName']
 
 
 for i in json_data:
