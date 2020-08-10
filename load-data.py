@@ -14,7 +14,11 @@ def format_json(json_data):
   del json_data['id'], json_data['slug'], json_data['images']
 
   for i in json_data:
-    if i == 'appearance':
+    if i == 'powerstats':
+      powerstats = json_data[i].copy()
+      powerstats['overall'] = round( sum(powerstats[i] for i in powerstats) / len(powerstats) )
+      json_data[i] = powerstats
+    elif i == 'appearance':
       appearance = json_data[i].copy()
       appearance['height'] = f"{appearance['height'][1]} ({appearance['height'][0]})" if len(appearance['height']) == 2 else 'n/a'
       appearance['weight'] = f"{appearance['weight'][1]} ({appearance['weight'][0]})"
@@ -51,21 +55,18 @@ def format_json(json_data):
   return json_data
 
 def create_hero(hero_object):
-  return Superhero(hero_object['name'], hero_object['image'], hero_object['powerstats'], hero_object['appearance'], hero_object['biography'], hero_object['connections'], hero_object['work'])
+  return Superhero(
+    hero_object['name'], 
+    hero_object['image'], 
+    hero_object['powerstats'], 
+    hero_object['appearance'], 
+    hero_object['biography'], 
+    hero_object['connections'], 
+    hero_object['work']
+  )
 
 formatted_objects = [format_json(json_object) for json_object in json_data]
 superhero_objects = [create_hero(hero_object) for hero_object in formatted_objects]
-# superman = next(hero for hero in formatted_objects if hero['name'] == 'Superman')
 
-# superman_obj = Superhero(superman['name'], superman['image'], superman['powerstats'], superman['appearance'], superman['biography'], superman['connections'], superman['work'])
-
-# input("Object created. Press enter to continue >>> ")
-# print(superman_obj.get_appearance())
-# input(">>> ")
-# print(superman_obj.get_biography())
-# input(">>> ")
-# print(superman_obj.get_connections())
-# input(">>> ")
-# print(superman_obj.get_work_details())
 for superhero in superhero_objects:
-  print(superhero)
+  print(superhero, superhero.powerstats)
