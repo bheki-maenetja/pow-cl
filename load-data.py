@@ -68,6 +68,10 @@ def create_hero(hero_object):
     hero_object['work']
   )
 
+# Create the hero index
+def get_hero_index(heroes):
+  pass
+
 
 API_URL = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json"
 API_DATA = get_api_data(API_URL)

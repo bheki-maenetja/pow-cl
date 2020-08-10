@@ -23,6 +23,12 @@ class Superhero:
   def __str__(self):
     return f"{self.name.title()} - (Id: {self._id})"
   
+  def get_name(self):
+    return self.name.lower()
+  
+  def get_id(self):
+    return self._id
+  
   def get_appearance(self):
     appearance_dict = {}
     for key in self.__appearance_attrs:
