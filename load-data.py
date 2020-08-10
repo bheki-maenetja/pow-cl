@@ -9,7 +9,7 @@ json_data = data.json()
 
 def format_json(json_data):
   json_data['image'] = json_data['images']['lg']
-  del json_data['images']
+  del json_data['id'], json_data['slug'], json_data['images']
 
   for i in json_data:
     if i == 'appearance':
@@ -49,8 +49,6 @@ def format_json(json_data):
   
   return json_data
 
-_ = list
-
-formatted_objects = _(map(format_json, json_data))
+formatted_objects = [format_json(json_object) for json_object in json_data]
 for data_object in formatted_objects:
-  print(data_object['appearance'], end="\n\n")
+  print(data_object, end="\n\n")
