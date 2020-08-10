@@ -2,7 +2,7 @@ import requests
 import json
 import re
 
-api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/29.json"
+api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/id/5.json"
 
 data = requests.get(api_url)
 json_data = data.json()
@@ -33,6 +33,12 @@ for i in json_data:
     work['base'] = work['base'].lower() if work['base'] != "-" else "n/a"
 
     json_data[i] = { key: work[key] for key in work }
+  elif i == 'connections':
+    connections = json_data[i].copy()
+    connections['group_affiliations'] = [word.strip().lower() for word in re.split(',|_|-|!|;', connections['groupAffiliation'])] if connections['groupAffiliation'] != '-' else 'n/a'
+    connections['relatives'] = [word.strip().lower() for word in re.split(',|_|-|!|;', connections['relatives'])] if connections['relatives'] != '-' else 'n/a'
+    del connections['groupAffiliation']
+    json_data[i] = connections
 
 
 for i in json_data:
