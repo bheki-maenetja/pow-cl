@@ -4,11 +4,13 @@ import re
 
 from superheroes import Superhero
 
-api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json"
+# Get JSON API response data
+def get_api_data(url):
+  data = requests.get(url)
+  json_data = data.json()
+  return json_data
 
-data = requests.get(api_url)
-json_data = data.json()
-
+# Formatting JSON API response data
 def format_json(json_data):
   json_data['image'] = json_data['images']['lg']
   del json_data['id'], json_data['slug'], json_data['images']
@@ -54,6 +56,7 @@ def format_json(json_data):
   
   return json_data
 
+# Creating Superhero Objects from the Superhero Class
 def create_hero(hero_object):
   return Superhero(
     hero_object['name'], 
@@ -65,8 +68,12 @@ def create_hero(hero_object):
     hero_object['work']
   )
 
-formatted_objects = [format_json(json_object) for json_object in json_data]
-superhero_objects = [create_hero(hero_object) for hero_object in formatted_objects]
 
-for superhero in superhero_objects:
-  print(superhero, superhero.powerstats)
+API_URL = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json"
+API_DATA = get_api_data(API_URL)
+
+FORMATTED_OBJECTS = [format_json(json_object) for json_object in API_DATA]
+SUPERHERO_OBJECTS = [create_hero(hero_object) for hero_object in FORMATTED_OBJECTS]
+
+for superhero in SUPERHERO_OBJECTS:
+  print(superhero, superhero.powerstats, sep='\n')
