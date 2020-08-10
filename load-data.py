@@ -14,23 +14,25 @@ def format_json(json_data):
   for i in json_data:
     if i == 'appearance':
       appearance = json_data[i].copy()
-      appearance['height'] = f"{appearance['height'][1]} ({appearance['height'][0]})" 
+      # print(appearance)
+      appearance['height'] = f"{appearance['height'][1]} ({appearance['height'][0]})" if len(appearance['height']) == 2 else 'n/a'
       appearance['weight'] = f"{appearance['weight'][1]} ({appearance['weight'][0]})"
       appearance['eye_colour'] = appearance['eyeColor']
       appearance['hair_colour'] = appearance['hairColor'] if appearance['hairColor'] != "No Hair" else "n/a"
       del appearance['eyeColor'], appearance['hairColor']
 
-      json_data[i] = { key : appearance[key].lower() if appearance[key] else "n/a" for key in appearance }
+      json_data[i] = { key : appearance[key].lower() if appearance[key] and appearance[key] != '-' else "n/a" for key in appearance }
     elif i == 'biography':
       biography = json_data[i].copy()
       biography['full_name'] = biography['fullName'] if biography['fullName'] else "n/a"
       biography['place_of_birth'] = biography['placeOfBirth'] if biography['placeOfBirth'] != "-" else "n/a"
       biography['first_appearance'] = biography['firstAppearance'] if biography['firstAppearance'] != "-" else "n/a"
       biography['alter_egos'] = biography['alterEgos'] if biography['alterEgos'] != "No alter egos found." else "n/a"
-      biography['aliases'] = [alias.lower() for alias in biography['aliases']] if biography['aliases'] != ['-'] else 'n/a'
-      del biography['fullName'], biography['placeOfBirth'], biography['firstAppearance'], biography['alterEgos']
+      aliases = [alias.lower() for alias in biography['aliases']] if biography['aliases'] != ['-'] else 'n/a'
+      del biography['fullName'], biography['placeOfBirth'], biography['firstAppearance'], biography['alterEgos'], biography['aliases']
 
-      json_data[i] = { key : biography[key].lower() if key != 'aliases' else biography[key] for key in biography }
+      json_data[i] = { key : biography[key].lower() if biography[key] and biography[key] != '-' else 'n/a' for key in biography }
+      json_data[i]['aliases'] = aliases
     elif i == 'work':
       work = json_data[i].copy()
       work['occupation'] = [word.strip().lower() for word in re.split(',|_|-|!|;', work['occupation'])] if work['occupation'] != '-' else 'n/a'
@@ -44,6 +46,11 @@ def format_json(json_data):
       del connections['groupAffiliation']
 
       json_data[i] = connections
+  
+  return json_data
 
+_ = list
 
-print(json_data)
+formatted_objects = _(map(format_json, json_data))
+for data_object in formatted_objects:
+  print(data_object['appearance'], end="\n\n")
