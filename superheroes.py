@@ -46,8 +46,3 @@ class Superhero:
     for key in self.__work_attrs:
       work_dict[key] = getattr(self, key, 'n/a')
     return work_dict
-
-
-# my_first_hero = Superhero('The One', [1,2,3], {'xs': 'https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/images/xs/167-century.jpg', 'sm': 'https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/images/sm/167-century.jpg', 'md': 'https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/images/md/167-century.jpg', 'lg': 'https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/images/lg/167-century.jpg'})
-
-# print(my_first_hero)
