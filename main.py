@@ -1,4 +1,9 @@
+# Standard Library Imports
 from util import get_integer, get_string
+
+# Third-party Imports
+
+# Local Imports
 
 def main():
   """

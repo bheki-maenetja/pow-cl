@@ -1,8 +1,12 @@
-import requests
+# Standard Library Imports
 import json
 import re
 
-from superheroes import Superhero
+# Third-Party Imports
+import requests
+
+# Local Imports
+
 
 # Get JSON API response data
 def get_api_data(url):
@@ -56,28 +60,6 @@ def format_json(json_data):
   
   return json_data
 
-# Creating Superhero Objects from the Superhero Class
-def create_hero(hero_object):
-  return Superhero(
-    hero_object['name'], 
-    hero_object['image'], 
-    hero_object['powerstats'], 
-    hero_object['appearance'], 
-    hero_object['biography'], 
-    hero_object['connections'], 
-    hero_object['work']
-  )
-
-# Create the hero index
-def get_hero_index(heroes):
-  pass
 
 
-API_URL = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json"
-API_DATA = get_api_data(API_URL)
 
-FORMATTED_OBJECTS = [format_json(json_object) for json_object in API_DATA]
-SUPERHERO_OBJECTS = [create_hero(hero_object) for hero_object in FORMATTED_OBJECTS]
-
-for superhero in SUPERHERO_OBJECTS:
-  print(superhero, superhero.powerstats, sep='\n')
