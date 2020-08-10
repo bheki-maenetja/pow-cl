@@ -2,6 +2,8 @@ import requests
 import json
 import re
 
+from superheroes import Superhero
+
 api_url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json"
 
 data = requests.get(api_url)
@@ -14,7 +16,6 @@ def format_json(json_data):
   for i in json_data:
     if i == 'appearance':
       appearance = json_data[i].copy()
-      # print(appearance)
       appearance['height'] = f"{appearance['height'][1]} ({appearance['height'][0]})" if len(appearance['height']) == 2 else 'n/a'
       appearance['weight'] = f"{appearance['weight'][1]} ({appearance['weight'][0]})"
       appearance['eye_colour'] = appearance['eyeColor']
@@ -50,5 +51,15 @@ def format_json(json_data):
   return json_data
 
 formatted_objects = [format_json(json_object) for json_object in json_data]
-for data_object in formatted_objects:
-  print(data_object, end="\n\n")
+superman = next(hero for hero in formatted_objects if hero['name'] == 'Superman')
+
+superman_obj = Superhero(superman['name'], superman['image'], superman['powerstats'], superman['appearance'], superman['biography'], superman['connections'], superman['work'])
+
+input("Object created. Press enter to continue >>> ")
+print(superman_obj.get_appearance())
+input(">>> ")
+print(superman_obj.get_biography())
+input(">>> ")
+print(superman_obj.get_connections())
+input(">>> ")
+print(superman_obj.get_work_details())
