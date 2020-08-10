@@ -1,11 +1,12 @@
 class Superhero:
-  id = 0
+  hero_id = 0
 
   def __set_dict_attributes(self, obj_dict):
     for key in obj_dict:
       setattr(self, key, obj_dict[key])
 
-  def __init__(self, name, image, powerstats, appearance, biography, connections, work):
+  def __init__(self, name, image, powerstats, appearance={}, biography={}, connections={}, work={}):
+    self._id = Superhero.hero_id
     self.name = name.lower()
     self.powerstats = powerstats
     self.image = image
@@ -16,9 +17,11 @@ class Superhero:
     
     for _dict in (appearance, biography, connections, work):
       self.__set_dict_attributes(_dict)
+    
+    Superhero.hero_id += 1
  
   def __str__(self):
-    return self.name.title()
+    return f"{self.name.title()} - (Id: {self._id})"
   
   def get_appearance(self):
     appearance_dict = {}

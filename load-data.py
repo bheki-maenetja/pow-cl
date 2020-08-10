@@ -50,16 +50,22 @@ def format_json(json_data):
   
   return json_data
 
+def create_hero(hero_object):
+  return Superhero(hero_object['name'], hero_object['image'], hero_object['powerstats'], hero_object['appearance'], hero_object['biography'], hero_object['connections'], hero_object['work'])
+
 formatted_objects = [format_json(json_object) for json_object in json_data]
-superman = next(hero for hero in formatted_objects if hero['name'] == 'Superman')
+superhero_objects = [create_hero(hero_object) for hero_object in formatted_objects]
+# superman = next(hero for hero in formatted_objects if hero['name'] == 'Superman')
 
-superman_obj = Superhero(superman['name'], superman['image'], superman['powerstats'], superman['appearance'], superman['biography'], superman['connections'], superman['work'])
+# superman_obj = Superhero(superman['name'], superman['image'], superman['powerstats'], superman['appearance'], superman['biography'], superman['connections'], superman['work'])
 
-input("Object created. Press enter to continue >>> ")
-print(superman_obj.get_appearance())
-input(">>> ")
-print(superman_obj.get_biography())
-input(">>> ")
-print(superman_obj.get_connections())
-input(">>> ")
-print(superman_obj.get_work_details())
+# input("Object created. Press enter to continue >>> ")
+# print(superman_obj.get_appearance())
+# input(">>> ")
+# print(superman_obj.get_biography())
+# input(">>> ")
+# print(superman_obj.get_connections())
+# input(">>> ")
+# print(superman_obj.get_work_details())
+for superhero in superhero_objects:
+  print(superhero)
