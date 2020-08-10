@@ -72,14 +72,13 @@ def create_hero(hero_object):
   )
 
 # Create the hero index
-def get_hero_index(heroes):
-  return { (hero.get_id(), hero.get_name()): hero for hero in heroes }
+def get_hero_index():
+  try:
+    api_data = get_api_data()
+    heroes = [create_hero(format_json(json_object)) for json_object in api_data]
+    return { (hero.get_id(), hero.get_name()): hero for hero in heroes }
+  except:
+    print("Something went wrong when loading the superheroes. Sorry!")
+    return None
 
-API_URL = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json"
-API_DATA = get_api_data(API_URL)
 
-# FORMATTED_OBJECTS = [format_json(json_object) for json_object in API_DATA]
-SUPERHERO_OBJECTS = [create_hero(format_json(json_object)) for json_object in API_DATA]
-HERO_INDEX = get_hero_index(SUPERHERO_OBJECTS)
-
-print(HERO_INDEX)

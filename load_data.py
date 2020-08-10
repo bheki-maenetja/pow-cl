@@ -5,12 +5,11 @@ import re
 # Third-Party Imports
 import requests
 
-# Local Imports
-
+API_URL = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json"
 
 # Get JSON API response data
-def get_api_data(url):
-  data = requests.get(url)
+def get_api_data():
+  data = requests.get(API_URL)
   json_data = data.json()
   return json_data
 
