@@ -4,7 +4,7 @@ from util import get_integer, get_string
 # Third-party Imports
 # Local Imports
 from superheroes import get_hero_index
-from search import handle_search
+from search import handle_search, get_all_heroes
 
 # THE MAIN FUNCTION
 def main():
@@ -33,6 +33,7 @@ def main():
       break
     elif user_input == 'e':
       input("<EXPLORE HEROES/>")
+      get_all_heroes(hero_index, True)
     elif user_input == 's':
       input("<SEARCH FOR HERO/>")
       handle_search(hero_index)
