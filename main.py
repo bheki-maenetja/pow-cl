@@ -2,11 +2,9 @@
 from util import get_integer, get_string
 
 # Third-party Imports
-from tabulate import tabulate
-
 # Local Imports
 from superheroes import get_hero_index
-from search import simple_search
+from search import handle_search
 
 # THE MAIN FUNCTION
 def main():
@@ -37,10 +35,7 @@ def main():
       input("<EXPLORE HEROES/>")
     elif user_input == 's':
       input("<SEARCH FOR HERO/>")
-      search_data = simple_search(hero_index)
-      search_data.sort(key=lambda hero: hero["name"], reverse=True)
-      search_table = tabulate(search_data, headers="keys", showindex=range(1, len(search_data) + 1))
-      print(search_table)
+      handle_search()
     elif user_input == 'c':
       input("<COMPARISON TOOL/>")
   

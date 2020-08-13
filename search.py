@@ -4,8 +4,13 @@
 from util import get_string
 
 # Search Handler - handles navigation of search functionality
-def handle_search():
-  pass
+def handle_search(index):
+  user_input = get_string("Enter the name of a superhero or press 0 to quit")
+  while True:
+    if user_input == '0':
+      break
+    else:
+      simple_search(index, user_input)
 
 # Create a single row of search results
 def create_row(hero_obj, add_appearance=False, add_bio=False, add_work=False):
