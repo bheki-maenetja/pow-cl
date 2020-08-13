@@ -8,9 +8,14 @@ def handle_search():
   pass
 
 # Create a single row of search results
-def create_row(hero_obj):
+def create_row(hero_obj, add_appearance=False, add_bio=False, add_work=False):
   new_dict = {}
   new_dict['name'] = hero_obj.get_name().title()
+
+  if add_appearance: hero_obj.update(hero_obj.get_appearance())
+  if add_bio: hero_obj.update(hero_obj.get_biography())
+  if add_work: hero_obj.update(hero_obj.get_work_details())
+
   new_dict.update(hero_obj.get_powerstats())
   return new_dict
 

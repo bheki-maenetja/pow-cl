@@ -38,7 +38,8 @@ def main():
     elif user_input == 's':
       input("<SEARCH FOR HERO/>")
       search_data = simple_search(hero_index)
-      search_table = tabulate(search_data, headers="keys")
+      search_data.sort(key=lambda hero: hero["name"], reverse=True)
+      search_table = tabulate(search_data, headers="keys", showindex=range(1, len(search_data) + 1))
       print(search_table)
     elif user_input == 'c':
       input("<COMPARISON TOOL/>")
