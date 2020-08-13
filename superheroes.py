@@ -35,6 +35,9 @@ class Superhero:
   def get_id(self):
     return self._id
   
+  def get_powerstats(self):
+    return self.powerstats
+  
   def get_appearance(self):
     appearance_dict = {}
     for key in self.__appearance_attrs:
