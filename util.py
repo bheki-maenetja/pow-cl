@@ -16,7 +16,7 @@ def get_integer(min_value, max_value, input_prompt):
   
   return number
 
-def get_string(input_prompt, error_prompt, max_length=inf, min_length=1, accept_values=None):
+def get_string(input_prompt, error_prompt, max_length=inf, min_length=0, accept_values=None):
   user_error = False
   while True:
     try:

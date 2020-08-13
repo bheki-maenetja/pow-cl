@@ -28,14 +28,14 @@ def main():
   }
 
   while hero_index:
-    user_input = get_string(1,1, user_prompts["general"], user_prompts["general-error"], accept_values=['e', 's', 'c', 'q'])
+    user_input = get_string(user_prompts["general"], user_prompts["general-error"], 1, 1, accept_values=['e', 's', 'c', 'q'])
     if user_input == 'q':
       break
     elif user_input == 'e':
       input("<EXPLORE HEROES/>")
     elif user_input == 's':
       input("<SEARCH FOR HERO/>")
-      handle_search()
+      handle_search(hero_index)
     elif user_input == 'c':
       input("<COMPARISON TOOL/>")
   
