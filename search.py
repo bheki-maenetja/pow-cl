@@ -13,13 +13,17 @@ def handle_search(index, display_all=False):
     elif user_input == "" and display_all: # Get all heroes - returns all the heroes in a search table
       search_results = simple_search(index)
       get_search_table(search_results)
-      print(get_hero(search_results))
+      super_hero = get_hero(search_results, index)
+      if super_hero:
+        input("<DISPLAY HERO/>")
       display_all = False
     else:
       search_results = simple_search(index, user_input)
       get_search_table(search_results)
       if len(search_results) > 0:
-        print(get_hero(search_results))
+        super_hero = get_hero(search_results, index)
+        if super_hero:
+          input("<DISPLAY HERO/>")
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
@@ -50,9 +54,13 @@ def simple_search(index, search_name=""):
   return search_results
 
 # Get hero - view a single hero from the search results
-def get_hero(search_results):
-  choice_index = get_integer(user_prompts['get-heroes'], len(search_results), 1, "b")
-  return search_results[choice_index - 1] if choice_index else None
+def get_hero(search_results, index):
+  choice_index = get_integer(user_prompts['get-heroes'], len(search_results), 1, 'b')
+  if not choice_index:
+    return None
+  chosen_hero = search_results[choice_index - 1]
+  chosen_hero_obj = { key: index[key] for key in index if key[0] == chosen_hero['id'] }
+  return chosen_hero_obj
 
 
 
