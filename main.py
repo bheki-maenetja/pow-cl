@@ -23,7 +23,7 @@ def main():
   hero_index = get_hero_index()
 
   while hero_index:
-    user_input = get_string(user_prompts["general"], user_prompts["general-error"], 1, 1, accept_values=['e', 's', 'c', 'q'])
+    user_input = get_string(user_prompts["general"], 1, 1, accept_values=['e', 's', 'c', 'q'])
     if user_input == 'q':
       break
     elif user_input == 'e':

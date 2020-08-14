@@ -6,7 +6,6 @@ from math import inf
 # User Prompts
 user_prompts = {
     "general": "To explore your favourite superheroes, press 'e'. If you want to search for a particular hero press 's'. Or you can check out our nifty comparison tool; just press 'c'. To quit press 'q'",
-    "general-error": "Please enter a valid input",
     "explore-heroes-info": "Would you like to view your heroes with additional information?",
     "explore-heroes-sort": "Would you like to sort your heroes by the their power levels?"
   }
@@ -24,7 +23,7 @@ def get_integer(min_value, max_value, input_prompt):
   
   return number
 
-def get_string(input_prompt, error_prompt, max_length=inf, min_length=0, accept_values=None):
+def get_string(input_prompt, error_prompt="Please enter a valid input", max_length=inf, min_length=0, accept_values=None):
   user_error = False
   while True:
     try:
@@ -39,7 +38,7 @@ def get_string(input_prompt, error_prompt, max_length=inf, min_length=0, accept_
   
   return string
 
-def get_bool(input_prompt, error_prompt):
+def get_bool(input_prompt, error_prompt="Please enter a valid input"):
   choice = get_string(f"{input_prompt} [y/n]", error_prompt, accept_values=['y', 'n'])
   if choice == 'y':
     return True
