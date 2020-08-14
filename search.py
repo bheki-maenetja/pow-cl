@@ -10,23 +10,22 @@ def handle_search(index, display_all=False):
   while True:
     if user_input == '0':
       break
-    elif user_input == "" and display_all:
-      get_all_heroes(index)
+    elif user_input == "" and display_all: # Get all heroes - returns all the heroes in a search table
+      search_results = simple_search(index)
+      get_search_table(search_results)
       display_all = False
     else:
-      sort_by_power = get_bool(user_prompts['explore-heroes-sort'])
-      view_additional_info = get_bool(user_prompts['explore-heroes-info'])
-      search_results = simple_search(index, user_input, view_additional_info, sort_by_power)
+      search_results = simple_search(index, user_input)
       get_search_table(search_results)
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
 def create_row(hero_obj, add_appearance=False):
   new_dict = {}
+  new_dict['id'] = hero_obj.get_id()
   new_dict['name'] = hero_obj.get_name().title()
-
-  if add_appearance: new_dict.update(hero_obj.get_appearance())
-
+  if add_appearance: 
+    new_dict.update(hero_obj.get_appearance())
   new_dict.update(hero_obj.get_powerstats())
   return new_dict
 
@@ -37,7 +36,9 @@ def compare_string(search_term, value):
   else:
     return search_term in value or value in search_term
 
-def simple_search(index, search_name="", additional_info=False, sort_by_overall=False):
+def simple_search(index, search_name=""):
+  sort_by_overall = get_bool(user_prompts['explore-heroes-sort'])
+  additional_info = get_bool(user_prompts['explore-heroes-info'])
   search_results = [create_row(hero, additional_info) for hero in index.values() if not search_name or compare_string(search_name.lower(), hero.get_name())]
   if sort_by_overall:
     search_results.sort(key=lambda hero: hero['overall'], reverse=True)
@@ -45,10 +46,6 @@ def simple_search(index, search_name="", additional_info=False, sort_by_overall=
     search_results.sort(key=lambda hero: hero['name'])
   return search_results
 
-# Get all heroes - returns all the heroes in a search table
-def get_all_heroes(index):
-  sort_by_power = get_bool(user_prompts['explore-heroes-sort'])
-  view_additional_info = get_bool(user_prompts['explore-heroes-info'])
-  get_search_table(simple_search(index, additional_info=view_additional_info, sort_by_overall=sort_by_power))
+
 
 
