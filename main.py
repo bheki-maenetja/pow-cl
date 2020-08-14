@@ -1,5 +1,5 @@
 # Standard Library Imports
-from util import get_integer, get_string
+from util import get_string, user_prompts
 
 # Third-party Imports
 # Local Imports
@@ -22,18 +22,13 @@ def main():
   print("Loading superheroes...")
   hero_index = get_hero_index()
 
-  user_prompts = {
-    "general": "To explore your favourite superheroes, press 'e'. If you want to search for a particular hero press 's'. Or you can check out our nifty comparison tool; just press 'c'. To quit press 'q'",
-    "general-error": "Please enter a valid input"
-  }
-
   while hero_index:
     user_input = get_string(user_prompts["general"], user_prompts["general-error"], 1, 1, accept_values=['e', 's', 'c', 'q'])
     if user_input == 'q':
       break
     elif user_input == 'e':
       input("<EXPLORE HEROES/>")
-      get_all_heroes(hero_index, True)
+      get_all_heroes(hero_index)
     elif user_input == 's':
       input("<SEARCH FOR HERO/>")
       handle_search(hero_index)

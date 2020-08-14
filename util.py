@@ -3,6 +3,14 @@ from math import inf
 # Third Party Imports
 # Local Imports
 
+# User Prompts
+user_prompts = {
+    "general": "To explore your favourite superheroes, press 'e'. If you want to search for a particular hero press 's'. Or you can check out our nifty comparison tool; just press 'c'. To quit press 'q'",
+    "general-error": "Please enter a valid input",
+    "explore-heroes-info": "Would you like to view your heroes with additional information?",
+    "explore-heroes-sort": "Would you like to sort your heroes by the their power levels?"
+  }
+
 # User Input
 def get_integer(min_value, max_value, input_prompt):
   while True:
@@ -32,7 +40,7 @@ def get_string(input_prompt, error_prompt, max_length=inf, min_length=0, accept_
   return string
 
 def get_bool(input_prompt, error_prompt):
-  choice = get_string(input_prompt + '[y/n]', error_prompt, accept_values=['y', 'n'])
+  choice = get_string(f"{input_prompt} [y/n]", error_prompt, accept_values=['y', 'n'])
   if choice == 'y':
     return True
   elif choice == 'n':
