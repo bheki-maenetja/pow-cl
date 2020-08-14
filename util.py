@@ -8,17 +8,22 @@ user_prompts = {
     "general": "To explore your favourite superheroes, press 'e'. If you want to search for a particular hero press 's'. Or you can check out our nifty comparison tool; just press 'c'. To quit press 'q'",
     "explore-heroes-info": "Would you like to view your heroes with additional information?",
     "explore-heroes-sort": "Would you like to sort your heroes by the their power levels?",
-    "search-heroes": "Search for your favourite superhero or press 0 to go back"
+    "search-heroes": "Search for your favourite superhero or press 0 to go back",
+    "get-heroes": "To view a hero enter it's corresponding number or press b to go back"
   }
 
 # User Input
-def get_integer(input_prompt, max_value, min_value):
+def get_integer(input_prompt, max_value, min_value, break_value):
   while True:
     try:
-      number = int(input(f"{input_prompt}: "))
-      if number not in range(min_value, max_value + 1): raise ValueError
+      number = input(f"{input_prompt}: ")
+      if number == break_value:
+        return None
+      number = int(number)
+      if int(number) not in range(min_value, max_value + 1): 
+        raise ValueError
     except ValueError:
-      print(f"Please enter a number between {min_value} and {max_value}!!!")
+      print(f"Please enter a number between {min_value} and {max_value}! Or press {break_value} to go back.")
     else:
       break
   

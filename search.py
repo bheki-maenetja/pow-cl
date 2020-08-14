@@ -1,7 +1,7 @@
 # Standard Library Imports
 # Third Party Imports
 # Local Imports
-from util import get_string, get_bool, user_prompts
+from util import get_string, get_integer, get_bool, user_prompts
 from display import get_search_table
 
 # Search Handler - handles navigation of search functionality
@@ -13,10 +13,13 @@ def handle_search(index, display_all=False):
     elif user_input == "" and display_all: # Get all heroes - returns all the heroes in a search table
       search_results = simple_search(index)
       get_search_table(search_results)
+      print(get_hero(search_results))
       display_all = False
     else:
       search_results = simple_search(index, user_input)
       get_search_table(search_results)
+      if len(search_results) > 0:
+        print(get_hero(search_results))
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
@@ -45,6 +48,11 @@ def simple_search(index, search_name=""):
   else:
     search_results.sort(key=lambda hero: hero['name'])
   return search_results
+
+# Get hero - view a single hero from the search results
+def get_hero(search_results):
+  choice_index = get_integer(user_prompts['get-heroes'], len(search_results), 1, "b")
+  return search_results[choice_index - 1] if choice_index else None
 
 
 

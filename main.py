@@ -4,7 +4,7 @@ from util import get_string, user_prompts
 # Third-party Imports
 # Local Imports
 from superheroes import get_hero_index
-from search import handle_search, get_all_heroes
+from search import handle_search
 
 # THE MAIN FUNCTION
 def main():
