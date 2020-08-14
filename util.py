@@ -7,11 +7,12 @@ from math import inf
 user_prompts = {
     "general": "To explore your favourite superheroes, press 'e'. If you want to search for a particular hero press 's'. Or you can check out our nifty comparison tool; just press 'c'. To quit press 'q'",
     "explore-heroes-info": "Would you like to view your heroes with additional information?",
-    "explore-heroes-sort": "Would you like to sort your heroes by the their power levels?"
+    "explore-heroes-sort": "Would you like to sort your heroes by the their power levels?",
+    "search-heroes": "Search for your favourite superhero or press 0 to go back"
   }
 
 # User Input
-def get_integer(min_value, max_value, input_prompt):
+def get_integer(input_prompt, max_value, min_value):
   while True:
     try:
       number = int(input(f"{input_prompt}: "))
