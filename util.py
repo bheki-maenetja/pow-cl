@@ -30,3 +30,10 @@ def get_string(input_prompt, error_prompt, max_length=inf, min_length=0, accept_
       break
   
   return string
+
+def get_bool(input_prompt, error_prompt):
+  choice = get_string(input_prompt + '[y/n]', error_prompt, accept_values=['y', 'n'])
+  if choice == 'y':
+    return True
+  elif choice == 'n':
+    return False
