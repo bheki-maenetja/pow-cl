@@ -5,15 +5,20 @@ from util import get_string, get_bool, user_prompts
 from display import get_search_table
 
 # Search Handler - handles navigation of search functionality
-def handle_search(index):
-  user_input = get_string("Enter the name of a superhero or press 0 to quit", "Please enter a valid input")
+def handle_search(index, display_all=False):
+  user_input = get_string("Enter the name of a superhero or press 0 to go back") if not display_all else ""
   while True:
     if user_input == '0':
       break
+    elif user_input == '' and display_all:
+      get_all_heroes(index)
+      display_all = False
     else:
-      search_results = simple_search(index, user_input, False)
+      sort_by_power = get_bool(user_prompts['explore-heroes-sort'])
+      view_additional_info = get_bool(user_prompts['explore-heroes-info'])
+      search_results = simple_search(index, user_input, view_additional_info, sort_by_power)
       get_search_table(search_results)
-    user_input = get_string("Enter the name of a superhero or press 0 to quit", "Please enter a valid input")
+    user_input = get_string("Enter the name of a superhero or press 0 to go back")
 
 # Create a single row of search results
 def create_row(hero_obj, add_appearance=False):
@@ -42,8 +47,8 @@ def simple_search(index, search_name="", additional_info=False, sort_by_overall=
 
 # Get all heroes - returns all the heroes in a search table
 def get_all_heroes(index):
-  sort_by_power = get_bool(user_prompts['explore-heroes-sort'], user_prompts['general-error'])
-  view_additional_info = get_bool(user_prompts['explore-heroes-info'], user_prompts['general-error'])
+  sort_by_power = get_bool(user_prompts['explore-heroes-sort'])
+  view_additional_info = get_bool(user_prompts['explore-heroes-info'])
   get_search_table(simple_search(index, additional_info=view_additional_info, sort_by_overall=sort_by_power))
 
 

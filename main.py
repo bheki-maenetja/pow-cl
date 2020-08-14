@@ -28,7 +28,7 @@ def main():
       break
     elif user_input == 'e':
       input("<EXPLORE HEROES/>")
-      get_all_heroes(hero_index)
+      handle_search(hero_index, display_all=True)
     elif user_input == 's':
       input("<SEARCH FOR HERO/>")
       handle_search(hero_index)
