@@ -1,8 +1,9 @@
 # Standard Library Imports
+from subprocess import call
 # Third Party Imports
 # Local Imports
 from util import get_string, get_integer, get_bool, user_prompts
-from display import get_search_table, display_hero
+from display import get_search_table
 
 # Search Handler - handles navigation of search functionality
 def handle_search(index, display_all=False):
@@ -25,7 +26,7 @@ def handle_search(index, display_all=False):
         if super_hero:
           print(super_hero.__dict__)
           input("<DISPLAY HERO/>")
-          display_hero(super_hero)
+          call('bash_scripts.sh')
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
