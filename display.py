@@ -14,7 +14,7 @@ def get_search_table(search_data):
   print(tabulated_data, end="\n\n")
 
 # Display superhero information in a new pygame window
-def set_up_window():
+def display_hero(hero_obj):
   WIDTH, HEIGHT = 540, 720
   BLUE = (0, 0, 255)
   FPS = 30
@@ -31,9 +31,9 @@ def set_up_window():
     for event in pygame.event.get():
       if event.type == pygame.QUIT: # check for closing the window
         running = False
+        break
 
     # Update
-    
     # Draw / Render
     screen.fill(BLUE)
 

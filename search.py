@@ -2,7 +2,7 @@
 # Third Party Imports
 # Local Imports
 from util import get_string, get_integer, get_bool, user_prompts
-from display import get_search_table, set_up_window
+from display import get_search_table, display_hero
 
 # Search Handler - handles navigation of search functionality
 def handle_search(index, display_all=False):
@@ -23,9 +23,9 @@ def handle_search(index, display_all=False):
       if len(search_results) > 0:
         super_hero = get_hero(search_results, index)
         if super_hero:
+          print(super_hero.__dict__)
           input("<DISPLAY HERO/>")
-          print(super_hero)
-          set_up_window()
+          display_hero(super_hero)
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
