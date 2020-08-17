@@ -24,6 +24,7 @@ def handle_search(index, display_all=False):
         super_hero = get_hero(search_results, index)
         if super_hero:
           input("<DISPLAY HERO/>")
+          print(super_hero, super_hero.__dict__, sep="\n")
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
@@ -59,8 +60,7 @@ def get_hero(search_results, index):
   if not choice_index:
     return None
   chosen_hero = search_results[choice_index - 1]
-  chosen_hero_obj = { key: index[key] for key in index if key[0] == chosen_hero['id'] }
-  return chosen_hero_obj
+  return next( index[key] for key in index if key[0] == chosen_hero['id'] )
 
 
 
