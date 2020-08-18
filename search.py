@@ -19,6 +19,7 @@ def handle_search(index, display_all=False):
       if super_hero:
         input("<DISPLAY HERO/>")
         save_hero(super_hero)
+        call('./bash_scripts.sh', shell=True)
       display_all = False
     else:
       search_results = simple_search(index, user_input)

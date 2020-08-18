@@ -11,6 +11,9 @@ def display_hero():
   WIDTH, HEIGHT = 540, 720
   BLUE = (0, 0, 255)
   FPS = 30
+  
+  hero_data = load_hero_data()
+  hero_image = hero_data['image']
 
   pygame.init()
   screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -37,14 +40,13 @@ def display_hero():
     clock.tick(FPS)
 
 # Load hero info - loads hero information from the current_hero file
-def load_hero_info():
+def load_hero_data():
   try:
     file_handler = open(argv[1], 'r')
     data = next(line for line in file_handler.readlines())
     hero_data = loads(data)
-    print(type(hero_data), hero_data)
+    return hero_data
   except:
     print('Could not load hero info')
 
-load_hero_info()
 display_hero()
