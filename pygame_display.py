@@ -1,6 +1,8 @@
 # Standard Library Imports
 from sys import argv
 from json import loads
+import io
+from urllib.request import urlopen
 # Third-Party imports
 import pygame
 
@@ -13,7 +15,10 @@ def display_hero():
   FPS = 30
   
   hero_data = load_hero_data()
-  hero_image = hero_data['image']
+  image_url = hero_data['image']
+  image_str = urlopen(image_url).read()
+  image_file = io.BytesIO(image_str)
+  hero_image = pygame.image.load(image_file)
 
   pygame.init()
   screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -32,7 +37,7 @@ def display_hero():
     # Update
     # Draw / Render
     screen.fill(BLUE)
-
+    screen.blit(hero_image, (0,0))
     # AFTER Drawing Everything, Flip the Display
     pygame.display.flip()
 
