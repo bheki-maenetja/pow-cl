@@ -64,6 +64,10 @@ def get_hero(search_results, index):
   chosen_hero = search_results[choice_index - 1]
   return next( index[key] for key in index if key[0] == chosen_hero['id'] )
 
+# Select hero - select a hero object and store its information in the current_hero file
+def save_hero(hero_obj):
+  print(hero_obj.get_all_info())
+
 
 
 

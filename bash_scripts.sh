@@ -1,1 +1,1 @@
-python pygame_display.py
+python pygame_display.py current_hero.txt

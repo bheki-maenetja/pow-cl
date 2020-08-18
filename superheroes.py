@@ -14,8 +14,8 @@ class Superhero:
   def __init__(self, name, image, powerstats, appearance={}, biography={}, connections={}, work={}):
     self._id = Superhero.hero_id
     self.name = name.lower()
-    self.powerstats = powerstats
     self.image = image
+    self.powerstats = powerstats
     self.__appearance_attrs = list(appearance.keys())
     self.__biography_attrs = list(biography.keys())
     self.__connection_attrs = list(connections.keys())
@@ -29,12 +29,15 @@ class Superhero:
   def __str__(self):
     return f"{self.name.title()} - (Id: {self._id})"
   
+  def get_id(self):
+    return self._id
+
   def get_name(self):
     return self.name.lower()
   
-  def get_id(self):
-    return self._id
-  
+  def get_image(self):
+    return self.image
+
   def get_powerstats(self):
     return self.powerstats
   
@@ -61,6 +64,18 @@ class Superhero:
     for key in self.__work_attrs:
       work_dict[key] = getattr(self, key, 'n/a')
     return work_dict
+  
+  def get_all_info(self):
+    return {
+      'id': self.get_id(),
+      'name': self.get_name(),
+      'image': self.get_image(),
+      'powerstats': self.get_powerstats(),
+      'appearance': self.get_appearance,
+      'biography': self.get_biography(),
+      'connections': self.get_connections(),
+      'work': self.get_work_details(),
+    }
 
 # Create a Superhero
 def create_hero(hero_object):
