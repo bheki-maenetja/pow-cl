@@ -26,7 +26,7 @@ def handle_search(index, display_all=False):
         if super_hero:
           print(super_hero.__dict__)
           input("<DISPLAY HERO/>")
-          call('bash_scripts.sh', shell=True)
+          call('./bash_scripts.sh', shell=True)
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
