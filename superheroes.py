@@ -71,7 +71,7 @@ class Superhero:
       'name': self.get_name(),
       'image': self.get_image(),
       'powerstats': self.get_powerstats(),
-      'appearance': self.get_appearance,
+      'appearance': self.get_appearance(),
       'biography': self.get_biography(),
       'connections': self.get_connections(),
       'work': self.get_work_details(),
