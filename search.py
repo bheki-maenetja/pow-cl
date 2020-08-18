@@ -1,5 +1,6 @@
 # Standard Library Imports
 from subprocess import call
+from json import dumps
 # Third Party Imports
 # Local Imports
 from util import get_string, get_integer, get_bool, user_prompts
@@ -67,7 +68,14 @@ def get_hero(search_results, index):
 
 # Select hero - select a hero object and store its information in the current_hero file
 def save_hero(hero_obj):
-  print(hero_obj.get_all_info())
+  hero_data = hero_obj.get_all_info()
+  hero_json_data = dumps(hero_data)
+  
+  try:
+    file_handler = open('current_hero.txt', 'w')
+    file_handler.write(hero_json_data)
+  except:
+    print('Something went wrong')
 
 
 
