@@ -1,4 +1,9 @@
+# Standard Library Imports
+from sys import argv
+# Third-Party imports
 import pygame
+
+# Local Imports
 
 def display_hero():
   WIDTH, HEIGHT = 540, 720
