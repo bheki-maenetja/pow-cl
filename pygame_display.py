@@ -11,7 +11,7 @@ import pygame
 # Display hero - display the hero's picture along with all their info
 def display_hero():
   WIDTH, HEIGHT = 540, 720
-  BLUE = (0, 0, 255)
+  BACKGROUND_COLOUR = (255, 255, 255)
   FPS = 30
   
   hero_data = load_hero_data()
@@ -32,8 +32,9 @@ def display_hero():
 
     # Update
     # Draw / Render
-    screen.fill(BLUE)
+    screen.fill(BACKGROUND_COLOUR)
     screen.blit(hero_image, (WIDTH // 2 - 150, 10))
+    draw_text(screen, hero_data['name'].title(), 36, WIDTH // 2, 435)
     # AFTER Drawing Everything, Flip the Display
     pygame.display.flip()
 
@@ -55,5 +56,14 @@ def load_hero_image(image_url):
   image_file = io.BytesIO(image_str)
   hero_image = pygame.image.load(image_file)
   return pygame.transform.scale(hero_image, (300,400))
+
+# Text handling - writes text on the pygame window
+def draw_text(surf, text, size, x, y, font_name='arial'):
+  chosen_font = pygame.font.match_font(font_name)
+  font = pygame.font.Font(chosen_font, size)
+  text_surf = font.render(text, True, (0,0,0))
+  text_rect = text_surf.get_rect()
+  text_rect.center = (x,y)
+  surf.blit(text_surf, text_rect)
 
 display_hero()
