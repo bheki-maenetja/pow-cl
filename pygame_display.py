@@ -15,11 +15,8 @@ def display_hero():
   FPS = 30
   
   hero_data = load_hero_data()
-  image_url = hero_data['image']
-  image_str = urlopen(image_url).read()
-  image_file = io.BytesIO(image_str)
-  hero_image = pygame.image.load(image_file)
-
+  hero_image = load_hero_image(hero_data['image'])
+  
   pygame.init()
   screen = pygame.display.set_mode((WIDTH, HEIGHT))
   clock = pygame.time.Clock()
@@ -52,5 +49,11 @@ def load_hero_data():
     return hero_data
   except:
     print('Could not load hero info')
+
+def load_hero_image(image_url):
+  image_str = urlopen(image_url).read()
+  image_file = io.BytesIO(image_str)
+  hero_image = pygame.image.load(image_file)
+  return hero_image
 
 display_hero()
