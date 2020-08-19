@@ -33,7 +33,7 @@ def display_hero():
     # Update
     # Draw / Render
     screen.fill(BLUE)
-    screen.blit(hero_image, (0,0))
+    screen.blit(hero_image, (WIDTH // 2 - 150, 10))
     # AFTER Drawing Everything, Flip the Display
     pygame.display.flip()
 
@@ -54,6 +54,6 @@ def load_hero_image(image_url):
   image_str = urlopen(image_url).read()
   image_file = io.BytesIO(image_str)
   hero_image = pygame.image.load(image_file)
-  return hero_image
+  return pygame.transform.scale(hero_image, (300,400))
 
 display_hero()
