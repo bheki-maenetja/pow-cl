@@ -32,7 +32,6 @@ def display_hero():
     for event in pygame.event.get():
       if event.type == pygame.QUIT: # check for closing the window
         running = False
-        pygame.quit()
 
     # Update
     # Draw / Render
