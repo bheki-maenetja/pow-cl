@@ -7,11 +7,12 @@ from urllib.request import urlopen
 import pygame
 
 # Local Imports
+import colours
 
 # Display hero - display the hero's picture along with all their info
 def display_hero():
   WIDTH, HEIGHT = 540, 720
-  BACKGROUND_COLOUR = (255, 255, 255)
+  BACKGROUND_COLOUR = colours.BLUE
   FPS = 30
   
   hero_data = load_hero_data()
