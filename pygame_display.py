@@ -45,6 +45,11 @@ def display_hero():
     for event in pygame.event.get():
       if event.type == pygame.QUIT: # check for closing the window
         running = False
+      elif event.type == pygame.MOUSEBUTTONDOWN:
+        x, y = event.pos
+        for button in buttons:
+          if button.get_rect().collidepoint(x,y):
+            print("Direct hit!!!")
 
     # Update
     # Draw / Render
