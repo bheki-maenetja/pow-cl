@@ -3,6 +3,7 @@ from sys import argv
 from json import loads
 import io
 from urllib.request import urlopen
+
 # Third-Party imports
 import pygame
 
