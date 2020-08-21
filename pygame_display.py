@@ -62,7 +62,7 @@ def load_hero_image(image_url):
 def draw_text(surf, text, size, x, y, font_name='arial'):
   chosen_font = pygame.font.match_font(font_name)
   font = pygame.font.Font(chosen_font, size)
-  text_surf = font.render(text, True, (0,0,0))
+  text_surf = font.render(text, True, colours.WHITE)
   text_rect = text_surf.get_rect()
   text_rect.center = (x,y)
   surf.blit(text_surf, text_rect)
