@@ -11,11 +11,11 @@ import colours
 
 # Button Sprites - spirites that represent buttons on a screen
 class Button(pygame.sprite.Sprite):
-  def __init__(self, x, y, text):
+  def __init__(self, x, y, width, height, text, font_size):
     super(Button, self).__init__()
-    self.image = pygame.Surface((200, 50))
+    self.image = pygame.Surface((width, height))
     self.image.fill(colours.RED)
-    draw_text(self.image, text, 30, 100, 25)
+    draw_text(self.image, text, font_size, width // 2, height // 2)
     self.rect = self.image.get_rect(center=(x, y))
   
   def get_rect(self):
@@ -33,7 +33,7 @@ def display_hero():
   pygame.init()
   screen = pygame.display.set_mode((WIDTH, HEIGHT))
   clock = pygame.time.Clock()
-  new_button = Button(WIDTH // 2, HEIGHT - 100, 'Biography')
+  new_button = Button(120, 480, 100, 40, 'Biography', 25)
   buttons = pygame.sprite.Group()
   buttons.add(new_button)
 
