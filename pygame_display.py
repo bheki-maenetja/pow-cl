@@ -33,9 +33,18 @@ def display_hero():
   pygame.init()
   screen = pygame.display.set_mode((WIDTH, HEIGHT))
   clock = pygame.time.Clock()
-  new_button = Button(120, 480, 100, 40, 'Biography', 25)
+
+  bio_button = Button(68, 480, 100, 40, 'Biography', 25)
+  appearance_button = Button(203, 480, 100, 40, 'Appearance', 23)
+  work_button = Button(338, 480, 100, 40, 'Work', 25)
+  connections_button = Button(473, 480, 100, 40, 'Connections', 23)
+
   buttons = pygame.sprite.Group()
-  buttons.add(new_button)
+
+  buttons.add(bio_button)
+  buttons.add(appearance_button)
+  buttons.add(work_button)
+  buttons.add(connections_button)
 
   # GAME LOOP
   running = True
