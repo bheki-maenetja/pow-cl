@@ -12,15 +12,36 @@ import colours
 
 # Button Sprites - spirites that represent buttons on a screen
 class Button(pygame.sprite.Sprite):
-  def __init__(self, x, y, width, height, text, font_size):
+  def __init__(self, x, y, width, height, text, font_size, is_selected=False):
     super(Button, self).__init__()
     self.image = pygame.Surface((width, height))
     self.image.fill(colours.RED)
     draw_text(self.image, text, font_size, width // 2, height // 2)
     self.rect = self.image.get_rect(center=(x, y))
+    self.width = width
+    self.height = height
+    self.text = text
+    self.font_size = font_size
+    self.is_selected = is_selected
   
   def get_rect(self):
     return self.rect
+  
+  def get_text(self):
+    return self.text
+  
+  def is_button_selected(self):
+    return self.is_selected
+
+  def select_button(self):
+    self.is_selected = True
+    self.image.fill(colours.BLUE)
+    draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.WHITE)
+  
+  def de_select_button(self):
+    self.is_selected = False
+    self.image.fill(colours.RED)
+    draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.BLACK)
 
 # Display hero - display the hero's picture along with all their info
 def display_hero():
@@ -35,7 +56,7 @@ def display_hero():
   screen = pygame.display.set_mode((WIDTH, HEIGHT))
   clock = pygame.time.Clock()
 
-  bio_button = Button(68, 480, 100, 40, 'Biography', 25)
+  bio_button = Button(68, 480, 100, 40, 'Biography', 25, is_selected=True)
   appearance_button = Button(203, 480, 100, 40, 'Appearance', 23)
   work_button = Button(338, 480, 100, 40, 'Work', 25)
   connections_button = Button(473, 480, 100, 40, 'Connections', 23)
@@ -59,7 +80,9 @@ def display_hero():
         x, y = event.pos
         for button in buttons:
           if button.get_rect().collidepoint(x,y):
-            print("Direct hit!!!")
+            for i in buttons: 
+              i.de_select_button()
+            button.select_button()
 
     # Update
     # Draw / Render
@@ -67,6 +90,8 @@ def display_hero():
     screen.blit(hero_image, (WIDTH // 2 - 150, 10))
     draw_text(screen, hero_data['name'].title(), 36, WIDTH // 2, 435)
     buttons.draw(screen)
+    selected_button = next(button for button in buttons if button.is_button_selected())
+    print(f"Will display information about {selected_button.get_text().upper()}")
     # AFTER Drawing Everything, Flip the Display
     pygame.display.flip()
 
@@ -90,10 +115,10 @@ def load_hero_image(image_url):
   return pygame.transform.scale(hero_image, (300,400))
 
 # Text handling - writes text on the pygame window
-def draw_text(surf, text, font_size, x, y, font_name='arial'):
+def draw_text(surf, text, font_size, x, y, font_name='arial', font_colour=colours.BLACK):
   chosen_font = pygame.font.match_font(font_name)
   font = pygame.font.Font(chosen_font, font_size)
-  text_surf = font.render(text, True, colours.BLACK)
+  text_surf = font.render(text, True, font_colour)
   text_rect = text_surf.get_rect()
   text_rect.center = (x,y)
   surf.blit(text_surf, text_rect)
