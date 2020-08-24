@@ -15,8 +15,13 @@ class Button(pygame.sprite.Sprite):
   def __init__(self, x, y, width, height, text, font_size, is_selected=False):
     super(Button, self).__init__()
     self.image = pygame.Surface((width, height))
-    self.image.fill(colours.RED)
-    draw_text(self.image, text, font_size, width // 2, height // 2)
+
+    if is_selected:
+      self.image.fill(colours.BLUE)
+      draw_text(self.image, text, font_size, width // 2, height // 2, font_colour=colours.WHITE)
+    else:
+      self.image.fill(colours.RED)
+      draw_text(self.image, text, font_size, width // 2, height // 2)
     self.rect = self.image.get_rect(center=(x, y))
     self.width = width
     self.height = height
