@@ -61,10 +61,11 @@ def display_hero():
   screen = pygame.display.set_mode((WIDTH, HEIGHT))
   clock = pygame.time.Clock()
 
-  bio_button = Button(68, 480, 100, 40, 'Biography', 25, is_selected=True)
-  appearance_button = Button(203, 480, 100, 40, 'Appearance', 23)
-  work_button = Button(338, 480, 100, 40, 'Work', 25)
-  connections_button = Button(473, 480, 100, 40, 'Connections', 23)
+  bio_button = Button(54, 480, 90, 40, 'Biography', 23, is_selected=True)
+  appearance_button = Button(162, 480, 90, 40, 'Appearance', 20)
+  work_button = Button(270, 480, 90, 40, 'Work', 25)
+  connections_button = Button(378, 480, 90, 40, 'Connections', 20)
+  powerstats_button = Button(486, 480,90, 40, 'Powerstats', 20)
 
   buttons = pygame.sprite.Group()
 
@@ -72,6 +73,7 @@ def display_hero():
   buttons.add(appearance_button)
   buttons.add(work_button)
   buttons.add(connections_button)
+  buttons.add(powerstats_button)
 
   # GAME LOOP
   running = True
@@ -93,7 +95,7 @@ def display_hero():
     # Draw / Render
     screen.fill(BACKGROUND_COLOUR)
     screen.blit(hero_image, (WIDTH // 2 - 150, 10))
-    draw_text(screen, hero_data['name'].title(), 36, WIDTH // 2, 435)
+    draw_text(screen, hero_data['name'].title(), 36, WIDTH // 2, 435, align_centre=True)
     buttons.draw(screen)
     selected_button = next(button for button in buttons if button.is_button_selected())
     render_hero_info(screen, hero_data[selected_button.get_text().lower()])
@@ -134,7 +136,14 @@ def draw_text(surf, text, font_size, x, y, font_name='arial', font_colour=colour
 def render_hero_info(surface, info_obj):
   index = 0
   for key in info_obj:
-    draw_text(surface, f"{' '.join(key.split('_')).title()}:", 25, x=70, y=530 + index * 20)
+    heading = f"{' '.join(key.split('_')).title()}:"
+    if type(info_obj[key]) == list:
+      info = ", ".join(info_obj[key]).title()
+    elif type(info_obj[key]) == str:
+      info = info_obj[key].title()
+    else:
+      info = info_obj[key]
+    draw_text(surface, f"{heading} {info}", 25, x=20, y=520 + index * 25)
     index += 1
 
 display_hero()
