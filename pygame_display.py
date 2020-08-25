@@ -18,10 +18,10 @@ class Button(pygame.sprite.Sprite):
 
     if is_selected:
       self.image.fill(colours.BLUE)
-      draw_text(self.image, text, font_size, width // 2, height // 2, font_colour=colours.WHITE)
+      draw_text(self.image, text, font_size, width // 2, height // 2, font_colour=colours.WHITE, align_centre=True)
     else:
       self.image.fill(colours.RED)
-      draw_text(self.image, text, font_size, width // 2, height // 2)
+      draw_text(self.image, text, font_size, width // 2, height // 2, align_centre=True)
     self.rect = self.image.get_rect(center=(x, y))
     self.width = width
     self.height = height
@@ -41,12 +41,12 @@ class Button(pygame.sprite.Sprite):
   def select_button(self):
     self.is_selected = True
     self.image.fill(colours.BLUE)
-    draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.WHITE)
+    draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.WHITE, align_centre=True)
   
   def de_select_button(self):
     self.is_selected = False
     self.image.fill(colours.RED)
-    draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.BLACK)
+    draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.BLACK, align_centre=True)
 
 # Display hero - display the hero's picture along with all their info
 def display_hero():
@@ -120,18 +120,21 @@ def load_hero_image(image_url):
   return pygame.transform.scale(hero_image, (300,400))
 
 # Text handling - writes text on the pygame window
-def draw_text(surf, text, font_size, x, y, font_name='arial', font_colour=colours.BLACK):
+def draw_text(surf, text, font_size, x, y, font_name='arial', font_colour=colours.BLACK, align_centre=False):
   chosen_font = pygame.font.match_font(font_name)
   font = pygame.font.Font(chosen_font, font_size)
   text_surf = font.render(text, True, font_colour)
   text_rect = text_surf.get_rect()
-  text_rect.center = (x,y)
+  if align_centre:
+    text_rect.center = (x,y)
+  else:
+    text_rect.x, text_rect.y = x, y
   surf.blit(text_surf, text_rect)
 
 def render_hero_info(surface, info_obj):
   index = 0
   for key in info_obj:
-    draw_text(surface, f"{' '.join(key.split('_')).title()}:", 18, x=60, y=490 + index * 10)
+    draw_text(surface, f"{' '.join(key.split('_')).title()}:", 25, x=70, y=530 + index * 20)
     index += 1
 
 display_hero()
