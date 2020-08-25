@@ -96,7 +96,7 @@ def display_hero():
     draw_text(screen, hero_data['name'].title(), 36, WIDTH // 2, 435)
     buttons.draw(screen)
     selected_button = next(button for button in buttons if button.is_button_selected())
-    print(f"Will display information about {selected_button.get_text().upper()}")
+    render_hero_info(screen, hero_data[selected_button.get_text().lower()])
     # AFTER Drawing Everything, Flip the Display
     pygame.display.flip()
 
@@ -127,5 +127,11 @@ def draw_text(surf, text, font_size, x, y, font_name='arial', font_colour=colour
   text_rect = text_surf.get_rect()
   text_rect.center = (x,y)
   surf.blit(text_surf, text_rect)
+
+def render_hero_info(surface, info_obj):
+  index = 0
+  for key in info_obj:
+    draw_text(surface, f"{' '.join(key.split('_')).title()}:", 18, x=60, y=490 + index * 10)
+    index += 1
 
 display_hero()
