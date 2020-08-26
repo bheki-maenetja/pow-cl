@@ -3,7 +3,7 @@ from subprocess import call
 from json import dumps
 # Third Party Imports
 # Local Imports
-from util import get_string, get_integer, get_bool, user_prompts
+from util.util_functions import get_string, get_integer, get_bool, user_prompts
 from search_table import get_search_table
 
 # Search Handler - handles navigation of search functionality
