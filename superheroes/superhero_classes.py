@@ -1,7 +1,7 @@
 # Standard Library Imports
 # Third-Party Imports
 # Local Imports
-from load_data import format_json, get_api_data
+from util.load_data import format_json, get_api_data
 
 # Superhero Classes
 class Superhero:
