@@ -1,5 +1,6 @@
 # Standard Library Imports
 from sys import argv
+from os import path
 from json import loads
 import io
 from urllib.request import urlopen
@@ -108,7 +109,7 @@ def display_hero():
 # Load hero info - loads hero information from the current_hero file
 def load_hero_data():
   try:
-    file_handler = open(argv[1], 'r')
+    file_handler = open(path.join(path.dirname(__file__), argv[1]), 'r')
     data = next(line for line in file_handler.readlines())
     hero_data = loads(data)
     return hero_data
