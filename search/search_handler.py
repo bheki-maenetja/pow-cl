@@ -1,10 +1,11 @@
 # Standard Library Imports
 from subprocess import call
 from json import dumps
+from os import path
 # Third Party Imports
 # Local Imports
 from util.util_functions import get_string, get_integer, get_bool, user_prompts
-from search_table import get_search_table
+from search.search_table import get_search_table
 
 # Search Handler - handles navigation of search functionality
 def handle_search(index, display_all=False):
@@ -29,7 +30,7 @@ def handle_search(index, display_all=False):
         if super_hero:
           input("<DISPLAY HERO/>")
           save_hero(super_hero)
-          call('./bash_scripts.sh', shell=True)
+          call(path.join(path.dirname(__file__), "../util/bash_scripts.sh"), shell=True)
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
@@ -72,7 +73,7 @@ def save_hero(hero_obj):
   hero_data = hero_obj.get_all_info()
   hero_json_data = dumps(hero_data)
   try:
-    file_handler = open('current_hero.txt', 'w')
+    file_handler = open(path.join(path.dirname(__file__), "../display/current_hero.txt"), 'w')
     file_handler.write(hero_json_data)
   except:
     print('Something went wrong')
