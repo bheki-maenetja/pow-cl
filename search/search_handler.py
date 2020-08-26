@@ -20,14 +20,14 @@ def handle_search(index, display_all=False):
       if super_hero:
         input("<DISPLAY HERO/>")
         save_hero(super_hero)
-        call('./bash_scripts.sh', shell=True)
+        call(path.join(path.dirname(__file__), "../util/bash_scripts.sh"), shell=True)
       display_all = False
     else:
       search_results = simple_search(index, user_input)
       get_search_table(search_results)
       if len(search_results) > 0:
         super_hero = get_hero(search_results, index)
-        if super_hero:
+        if super_hero: 
           input("<DISPLAY HERO/>")
           save_hero(super_hero)
           call(path.join(path.dirname(__file__), "../util/bash_scripts.sh"), shell=True)
