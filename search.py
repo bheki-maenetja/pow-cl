@@ -4,7 +4,7 @@ from json import dumps
 # Third Party Imports
 # Local Imports
 from util import get_string, get_integer, get_bool, user_prompts
-from display import get_search_table
+from search_table import get_search_table
 
 # Search Handler - handles navigation of search functionality
 def handle_search(index, display_all=False):
