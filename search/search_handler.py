@@ -2,6 +2,7 @@
 from subprocess import call
 from json import dumps
 from os import path
+
 # Third Party Imports
 # Local Imports
 from util.util_functions import get_string, get_integer, get_bool, user_prompts
@@ -32,6 +33,26 @@ def handle_search(index, display_all=False):
           save_hero(super_hero)
           call(path.join(path.dirname(__file__), "../bash_scripts/display_hero.sh"), shell=True)
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
+
+# Comparison Handler - handles the search and selection of superheroes for comparison
+def handle_compare(index):
+  input("Welcome to the comparion tool.\nWith the comparison tool you can select two superheroes and compare their powerstats and biographical info >>> ")
+  user_input = get_string(user_prompts['search-heroes'], min_length=1)
+  selected_heroes = []
+
+  while len(selected_heroes) != 2:
+    if user_input == '0':
+      break
+    else:
+      search_results = simple_search(index)
+      get_search_table(search_results)
+      superhero = get_hero(search_results, index)
+      if superhero:
+        input("<SAVE HERO/>")
+        print(f"You have chosen hero {superhero['name']}")
+        selected_heroes.append(superhero)
+    user_input = get_string(user_prompts['search-heroes'], min_length=1)
+
 
 # Create a single row of search results
 def create_row(hero_obj, add_appearance=False):
