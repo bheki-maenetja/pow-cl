@@ -98,11 +98,11 @@ def display_heroes():
     selected_button = next(button for button in buttons if button.is_button_selected())
 
     if selected_button.get_text().lower() == 'powerstats':
-      render_hero_info(screen, hero_data[0]['powerstats'], margin=20)
-      render_hero_info(screen, hero_data[0]['powerstats'], margin=WIDTH // 2 + 20)
+      render_hero_info(screen, hero_data[0]['powerstats'], margin=WIDTH // 4 - 150)
+      render_hero_info(screen, hero_data[1]['powerstats'], margin=3 * WIDTH // 4 - 150)
     elif selected_button.get_text().lower() == 'bio':
-      render_hero_info(screen, hero_data[0]['appearance'], margin=20)
-      render_hero_info(screen, hero_data[0]['appearance'], margin=WIDTH // 2 + 20)
+      render_hero_info(screen, hero_data[0]['appearance'], margin=WIDTH // 4 - 150)
+      render_hero_info(screen, hero_data[1]['appearance'], margin=3 * WIDTH // 4 - 150)
 
     # AFTER Drawing Everything, Flip the Display
     pygame.display.flip()
