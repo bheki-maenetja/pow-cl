@@ -1,0 +1,1 @@
+python ./display/compare_heroes.py compared_heroes.txt

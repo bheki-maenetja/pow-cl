@@ -53,7 +53,7 @@ def handle_compare(index):
   else:
     save_hero(selected_heroes[0], path.join(path.dirname(__file__), "../display/compared_heroes.txt"))
     save_hero(selected_heroes[1], path.join(path.dirname(__file__), "../display/compared_heroes.txt"), 'a')
-
+    call(path.join(path.dirname(__file__), "../bash_scripts/compare_heroes.sh"), shell=True)
 
 # Create a single row of search results
 def create_row(hero_obj, add_appearance=False):
@@ -99,7 +99,3 @@ def save_hero(hero_obj, file_path, file_mode='w'):
     file_handler.write(hero_json_data + "\n")
   except:
     print('Something went wrong')
-
-
-
-
