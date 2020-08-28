@@ -98,7 +98,7 @@ def save_hero(hero_obj, file_path, file_mode='w'):
   hero_json_data = dumps(hero_data)
   try:
     file_handler = open(file_path, file_mode)
-    file_handler.write(hero_json_data)
+    file_handler.write(hero_json_data + "\n")
   except:
     print('Something went wrong')
 
