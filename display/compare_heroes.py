@@ -95,6 +95,15 @@ def display_heroes():
     draw_text(screen, hero_data[1]['name'].title(), 36, 3 * WIDTH // 4, 435, align_centre=True)
     
     buttons.draw(screen)
+    selected_button = next(button for button in buttons if button.is_button_selected())
+
+    if selected_button.get_text().lower() == 'powerstats':
+      render_hero_info(screen, hero_data[0]['powerstats'], margin=20)
+      render_hero_info(screen, hero_data[0]['powerstats'], margin=WIDTH // 2 + 20)
+    elif selected_button.get_text().lower() == 'bio':
+      render_hero_info(screen, hero_data[0]['appearance'], margin=20)
+      render_hero_info(screen, hero_data[0]['appearance'], margin=WIDTH // 2 + 20)
+
     # AFTER Drawing Everything, Flip the Display
     pygame.display.flip()
 
@@ -127,5 +136,18 @@ def draw_text(surf, text, font_size, x, y, font_name='arial', font_colour=colour
   else:
     text_rect.x, text_rect.y = x, y
   surf.blit(text_surf, text_rect)
+
+def render_hero_info(surface, info_obj, margin):
+  index = 0
+  for key in info_obj:
+    heading = f"{' '.join(key.split('_')).title()}:"
+    if type(info_obj[key]) == list:
+      info = ", ".join(info_obj[key]).title()
+    elif type(info_obj[key]) == str:
+      info = info_obj[key].title()
+    else:
+      info = info_obj[key]
+    draw_text(surface, f"{heading} {info}", 25, x=margin, y=485 + index * 25)
+    index += 1
 
 display_heroes()
