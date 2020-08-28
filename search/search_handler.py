@@ -53,7 +53,8 @@ def handle_compare(index):
         selected_heroes.append(superhero)
   
   if len(selected_heroes) == 2:
-    pass
+    save_hero(selected_heroes[0], path.join(path.dirname(__file__), "../display/compared_heroes.txt"))
+    save_hero(selected_heroes[1], path.join(path.dirname(__file__), "../display/compared_heroes.txt"), 'a')
 
 
 # Create a single row of search results
