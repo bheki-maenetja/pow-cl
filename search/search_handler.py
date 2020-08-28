@@ -37,21 +37,20 @@ def handle_search(index, display_all=False):
 # Comparison Handler - handles the search and selection of superheroes for comparison
 def handle_compare(index):
   input("Welcome to the comparion tool.\nWith the comparison tool you can select two superheroes and compare their powerstats and biographical info >>> ")
-  user_input = get_string(user_prompts['search-heroes'], min_length=1)
   selected_heroes = []
 
   while len(selected_heroes) != 2:
+    user_input = get_string(user_prompts['search-heroes'], min_length=1)
     if user_input == '0':
       break
     else:
-      search_results = simple_search(index)
+      search_results = simple_search(index, user_input)
       get_search_table(search_results)
       superhero = get_hero(search_results, index)
       if superhero:
         input("<SAVE HERO/>")
-        print(f"You have chosen hero {superhero['name']}")
+        print(f"You have chosen hero {superhero}")
         selected_heroes.append(superhero)
-    user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 
 # Create a single row of search results

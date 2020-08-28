@@ -5,7 +5,7 @@ from util.util_functions import get_string, user_prompts
 # Third-party Imports
 # Local Imports
 from superheroes.superhero_classes import get_hero_index
-from search.search_handler import handle_search
+from search.search_handler import handle_search, handle_compare
 
 # THE MAIN FUNCTION
 def main():
@@ -35,6 +35,7 @@ def main():
       handle_search(hero_index)
     elif user_input == 'c':
       input("<COMPARISON TOOL/>")
+      handle_compare(hero_index)
   
   input("Thank you for using POW!!! >>> ")
 
