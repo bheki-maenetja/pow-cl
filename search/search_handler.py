@@ -48,11 +48,9 @@ def handle_compare(index):
       get_search_table(search_results)
       superhero = get_hero(search_results, index)
       if superhero:
-        input("<SAVE HERO/>")
-        print(f"You have chosen hero {superhero}")
+        input(f"You have chosen {superhero} >>> ")
         selected_heroes.append(superhero)
-  
-  if len(selected_heroes) == 2:
+  else:
     save_hero(selected_heroes[0], path.join(path.dirname(__file__), "../display/compared_heroes.txt"))
     save_hero(selected_heroes[1], path.join(path.dirname(__file__), "../display/compared_heroes.txt"), 'a')
 
