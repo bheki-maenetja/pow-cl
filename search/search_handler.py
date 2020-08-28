@@ -20,7 +20,7 @@ def handle_search(index, display_all=False):
       super_hero = get_hero(search_results, index)
       if super_hero:
         input("<DISPLAY HERO/>")
-        save_hero(super_hero)
+        save_hero(super_hero, path.join(path.dirname(__file__), "../display/current_hero.txt"))
         call(path.join(path.dirname(__file__), "../bash_scripts/display_hero.sh"), shell=True)
       display_all = False
     else:
@@ -30,7 +30,7 @@ def handle_search(index, display_all=False):
         super_hero = get_hero(search_results, index)
         if super_hero: 
           input("<DISPLAY HERO/>")
-          save_hero(super_hero)
+          save_hero(super_hero, path.join(path.dirname(__file__), "../display/current_hero.txt"))
           call(path.join(path.dirname(__file__), "../bash_scripts/display_hero.sh"), shell=True)
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
@@ -39,7 +39,7 @@ def handle_compare(index):
   input("Welcome to the comparion tool.\nWith the comparison tool you can select two superheroes and compare their powerstats and biographical info >>> ")
   selected_heroes = []
 
-  while len(selected_heroes) != 2:
+  while len(selected_heroes) < 2:
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
     if user_input == '0':
       break
@@ -51,6 +51,9 @@ def handle_compare(index):
         input("<SAVE HERO/>")
         print(f"You have chosen hero {superhero}")
         selected_heroes.append(superhero)
+  
+  if len(selected_heroes) == 2:
+    pass
 
 
 # Create a single row of search results
@@ -89,11 +92,11 @@ def get_hero(search_results, index):
   return next( index[key] for key in index if key[0] == chosen_hero['id'] )
 
 # Select hero - select a hero object and store its information in the current_hero file
-def save_hero(hero_obj):
+def save_hero(hero_obj, file_path, file_mode='w'):
   hero_data = hero_obj.get_all_info()
   hero_json_data = dumps(hero_data)
   try:
-    file_handler = open(path.join(path.dirname(__file__), "../display/current_hero.txt"), 'w')
+    file_handler = open(file_path, file_mode)
     file_handler.write(hero_json_data)
   except:
     print('Something went wrong')
