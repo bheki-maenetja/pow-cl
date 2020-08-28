@@ -20,7 +20,7 @@ def handle_search(index, display_all=False):
       if super_hero:
         input("<DISPLAY HERO/>")
         save_hero(super_hero)
-        call(path.join(path.dirname(__file__), "../bash_scripts/save_hero.sh"), shell=True)
+        call(path.join(path.dirname(__file__), "../bash_scripts/display_hero.sh"), shell=True)
       display_all = False
     else:
       search_results = simple_search(index, user_input)
@@ -30,7 +30,7 @@ def handle_search(index, display_all=False):
         if super_hero: 
           input("<DISPLAY HERO/>")
           save_hero(super_hero)
-          call(path.join(path.dirname(__file__), "../bash_scripts/save_hero.sh"), shell=True)
+          call(path.join(path.dirname(__file__), "../bash_scripts/display_hero.sh"), shell=True)
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
 # Create a single row of search results
