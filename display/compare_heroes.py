@@ -11,9 +11,48 @@ import pygame
 # Local Imports
 import colours
 
+# Button Sprites - spirites that represent buttons on a screen
+class Button(pygame.sprite.Sprite):
+  def __init__(self, x, y, width, height, text, font_size, is_selected=False):
+    super(Button, self).__init__()
+    self.image = pygame.Surface((width, height))
+
+    if is_selected:
+      self.image.fill(colours.BLUE)
+      draw_text(self.image, text, font_size, width // 2, height // 2, font_colour=colours.WHITE, align_centre=True)
+    else:
+      self.image.fill(colours.RED)
+      draw_text(self.image, text, font_size, width // 2, height // 2, align_centre=True)
+    self.rect = self.image.get_rect(center=(x, y))
+    self.width = width
+    self.height = height
+    self.text = text
+    self.font_size = font_size
+    self.is_selected = is_selected
+  
+  def get_rect(self):
+    return self.rect
+  
+  def get_text(self):
+    return self.text
+  
+  def is_button_selected(self):
+    return self.is_selected
+
+  def select_button(self):
+    self.is_selected = True
+    self.image.fill(colours.BLUE)
+    draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.WHITE, align_centre=True)
+  
+  def de_select_button(self):
+    self.is_selected = False
+    self.image.fill(colours.RED)
+    draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.BLACK, align_centre=True)
+
+# Display heroes - display the heroes' pictures along with all their info
 def display_heroes():
   WIDTH, HEIGHT = 960, 720
-  BACKGROUND_COLOUR = colours.BLUE
+  BACKGROUND_COLOUR = colours.WHITE
   FPS = 30
   
   pygame.init()
@@ -23,8 +62,11 @@ def display_heroes():
   hero_data = load_hero_data()
   hero_images = [load_hero_image(hero['image']) for hero in hero_data]
   
-  for hero in hero_data:
-    print(type(hero))
+  buttons = pygame.sprite.Group()
+  powerstats_button = Button(WIDTH // 2, HEIGHT // 2 - 30, 100, 50, "Powerstats", 20, is_selected=True)
+  bio_button = Button(WIDTH // 2, HEIGHT // 2 + 30, 100, 50, "Bio", 20)
+  buttons.add(powerstats_button)
+  buttons.add(bio_button)
 
   # GAME LOOP
   running = True
@@ -36,7 +78,11 @@ def display_heroes():
         running = False
       elif event.type == pygame.MOUSEBUTTONDOWN:
         x, y = event.pos
-        print(x,y)
+        for button in buttons:
+          if button.get_rect().collidepoint(x,y):
+            for b in buttons: 
+              b.de_select_button()
+            button.select_button()
 
     # Update
     # Draw / Render
@@ -47,6 +93,8 @@ def display_heroes():
 
     draw_text(screen, hero_data[0]['name'].title(), 36, WIDTH // 4, 435, align_centre=True)
     draw_text(screen, hero_data[1]['name'].title(), 36, 3 * WIDTH // 4, 435, align_centre=True)
+    
+    buttons.draw(screen)
     # AFTER Drawing Everything, Flip the Display
     pygame.display.flip()
 
