@@ -20,7 +20,7 @@ def handle_search(index, display_all=False):
       super_hero = get_hero(search_results, index)
       if super_hero:
         input("<DISPLAY HERO/>")
-        save_hero(super_hero, path.join(path.dirname(__file__), "../display/current_hero.txt"))
+        save_hero(path.join(path.dirname(__file__), "../display/current_hero.txt"), super_hero)
         call(path.join(path.dirname(__file__), "../bash_scripts/display_hero.sh"), shell=True)
       display_all = False
     else:
@@ -30,7 +30,7 @@ def handle_search(index, display_all=False):
         super_hero = get_hero(search_results, index)
         if super_hero: 
           input("<DISPLAY HERO/>")
-          save_hero(super_hero, path.join(path.dirname(__file__), "../display/current_hero.txt"))
+          save_hero(path.join(path.dirname(__file__), "../display/current_hero.txt"), super_hero)
           call(path.join(path.dirname(__file__), "../bash_scripts/display_hero.sh"), shell=True)
     user_input = get_string(user_prompts['search-heroes'], min_length=1)
 
@@ -51,8 +51,8 @@ def handle_compare(index):
         input(f"You have chosen {superhero} >>> ")
         selected_heroes.append(superhero)
   else:
-    save_hero(selected_heroes[0], path.join(path.dirname(__file__), "../display/compared_heroes.txt"))
-    save_hero(selected_heroes[1], path.join(path.dirname(__file__), "../display/compared_heroes.txt"), 'a')
+    save_hero(path.join(path.dirname(__file__), "../display/compared_heroes.txt"), selected_heroes[0])
+    save_hero(path.join(path.dirname(__file__), "../display/compared_heroes.txt"), selected_heroes[1], 'a')
     call(path.join(path.dirname(__file__), "../bash_scripts/compare_heroes.sh"), shell=True)
 
 # Create a single row of search results
@@ -91,22 +91,25 @@ def get_hero(search_results, index):
   return next( index[key] for key in index if key[0] == chosen_hero['id'] )
 
 # Select hero - select a hero object and store its information in the current_hero file
-def save_hero(file_path, hero_obj=None, file_mode='w', clear_file=false):
+def save_hero(file_path, hero_obj=None, file_mode='w', clear_file=False):
   if not clear_file:
     hero_data = hero_obj.get_all_info()
     hero_json_data = dumps(hero_data)
     try:
       file_handler = open(file_path, file_mode)
       file_handler.write(hero_json_data + "\n")
+      file_handler.close()
     except:
       print('Something went wrong')
   else:
     try:
       file_handler = open(file_path, file_mode)
+      file_handler.write("")
+      file_handler.close()
     except:
       print("Something is wrong")
 
 # Clear heroes - remove hero data from text file once user has finished using the app
 def clear_heroes(*file_paths):
   for file_name in file_paths:
-    print(file_name)
+    print(file_name, file_paths)

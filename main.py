@@ -1,5 +1,4 @@
 # Standard Library Imports
-# from util import get_string, user_prompts
 from util.util_functions import get_string, user_prompts
 
 # Third-party Imports
