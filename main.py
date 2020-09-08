@@ -1,8 +1,9 @@
 # Standard Library Imports
-from util.util_functions import get_string, user_prompts
+from os import path
 
 # Third-party Imports
 # Local Imports
+from util.util_functions import get_string, user_prompts
 from superheroes.superhero_classes import get_hero_index
 from search.search_handler import handle_search, handle_compare, clear_heroes
 
@@ -36,7 +37,7 @@ def main():
       input("<COMPARISON TOOL/>")
       handle_compare(hero_index)
   
-  clear_heroes("name", "another_name", "some other name")
+  clear_heroes(path.join(path.dirname(__file__), "./display/compared_heroes.txt"), path.join(path.dirname(__file__), "./display/current_hero.txt"))
   input("Thank you for using POW!!! >>> ")
 
 if __name__ == "__main__":

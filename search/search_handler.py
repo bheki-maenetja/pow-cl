@@ -111,5 +111,5 @@ def save_hero(file_path, hero_obj=None, file_mode='w', clear_file=False):
 
 # Clear heroes - remove hero data from text file once user has finished using the app
 def clear_heroes(*file_paths):
-  for file_name in file_paths:
-    print(file_name, file_paths)
+  for path in file_paths:
+    save_hero(path, clear_file=True)
