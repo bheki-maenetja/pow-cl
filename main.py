@@ -5,7 +5,7 @@ from util.util_functions import get_string, user_prompts
 # Third-party Imports
 # Local Imports
 from superheroes.superhero_classes import get_hero_index
-from search.search_handler import handle_search, handle_compare
+from search.search_handler import handle_search, handle_compare, clear_heroes
 
 # THE MAIN FUNCTION
 def main():
@@ -37,6 +37,7 @@ def main():
       input("<COMPARISON TOOL/>")
       handle_compare(hero_index)
   
+  clear_heroes("name", "another_name", "some other name")
   input("Thank you for using POW!!! >>> ")
 
 if __name__ == "__main__":

@@ -99,3 +99,8 @@ def save_hero(hero_obj, file_path, file_mode='w'):
     file_handler.write(hero_json_data + "\n")
   except:
     print('Something went wrong')
+
+# Clear heroes - remove hero data from text file once user has finished using the app
+def clear_heroes(**file_names):
+  for file_name in file_names:
+    print(file_names)
