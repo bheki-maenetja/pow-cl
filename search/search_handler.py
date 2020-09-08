@@ -91,16 +91,22 @@ def get_hero(search_results, index):
   return next( index[key] for key in index if key[0] == chosen_hero['id'] )
 
 # Select hero - select a hero object and store its information in the current_hero file
-def save_hero(hero_obj, file_path, file_mode='w'):
-  hero_data = hero_obj.get_all_info()
-  hero_json_data = dumps(hero_data)
-  try:
-    file_handler = open(file_path, file_mode)
-    file_handler.write(hero_json_data + "\n")
-  except:
-    print('Something went wrong')
+def save_hero(file_path, hero_obj=None, file_mode='w', clear_file=false):
+  if not clear_file:
+    hero_data = hero_obj.get_all_info()
+    hero_json_data = dumps(hero_data)
+    try:
+      file_handler = open(file_path, file_mode)
+      file_handler.write(hero_json_data + "\n")
+    except:
+      print('Something went wrong')
+  else:
+    try:
+      file_handler = open(file_path, file_mode)
+    except:
+      print("Something is wrong")
 
 # Clear heroes - remove hero data from text file once user has finished using the app
-def clear_heroes(**file_names):
-  for file_name in file_names:
-    print(file_names)
+def clear_heroes(*file_paths):
+  for file_name in file_paths:
+    print(file_name)
