@@ -53,7 +53,7 @@ class Button(pygame.sprite.Sprite):
 # Display hero - display the hero's picture along with all their info
 def display_hero():
   WIDTH, HEIGHT = 540, 720
-  BACKGROUND_COLOUR = choice([colours.ORANGE, colours.YELLOW, colours.GREEN])
+  BACKGROUND_COLOUR = choice((colours.ORANGE, colours.YELLOW, colours.GREEN))
   FPS = 30
   
   hero_data = load_hero_data()
