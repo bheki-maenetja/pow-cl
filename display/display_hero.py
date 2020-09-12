@@ -19,10 +19,10 @@ class Button(pygame.sprite.Sprite):
     self.image = pygame.Surface((width, height))
 
     if is_selected:
-      self.image.fill(colours.GREEN)
+      self.image.fill(colours.WHITE)
       draw_text(self.image, text, font_size, width // 2, height // 2, font_colour=colours.BLACK, align_centre=True)
     else:
-      self.image.fill(colours.BLUE)
+      self.image.fill(colours.BLACK)
       draw_text(self.image, text, font_size, width // 2, height // 2, font_colour=colours.WHITE, align_centre=True)
     self.rect = self.image.get_rect(center=(x, y))
     self.width = width
@@ -42,12 +42,12 @@ class Button(pygame.sprite.Sprite):
 
   def select_button(self):
     self.is_selected = True
-    self.image.fill(colours.GREEN)
+    self.image.fill(colours.WHITE)
     draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.BLACK, align_centre=True)
   
   def de_select_button(self):
     self.is_selected = False
-    self.image.fill(colours.BLUE)
+    self.image.fill(colours.BLACK)
     draw_text(self.image, self.text, self.font_size, self.width // 2, self.height // 2, font_colour=colours.WHITE, align_centre=True)
 
 # Display hero - display the hero's picture along with all their info
