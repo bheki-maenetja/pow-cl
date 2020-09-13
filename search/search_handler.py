@@ -74,7 +74,6 @@ def compare_string(search_term, value):
 
 def simple_search(index, search_name=""):
   search_results = [ None for hero in index.values() if not search_name or compare_string(search_name.lower(), hero.get_name().lower()) ]
-  print(search_results)
   if len(search_results) == 0:
     print('No matches. Try Again')
   else:
