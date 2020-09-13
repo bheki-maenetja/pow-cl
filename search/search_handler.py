@@ -59,7 +59,7 @@ def handle_compare(index):
 def create_row(hero_obj, add_appearance=False):
   new_dict = {}
   new_dict['id'] = hero_obj.get_id()
-  new_dict['name'] = hero_obj.get_name().title()
+  new_dict['name'] = hero_obj.get_name()
   if add_appearance: 
     new_dict.update(hero_obj.get_appearance())
   new_dict.update(hero_obj.get_powerstats())
@@ -73,13 +73,18 @@ def compare_string(search_term, value):
     return search_term in value or value in search_term
 
 def simple_search(index, search_name=""):
-  sort_by_overall = get_bool(user_prompts['explore-heroes-sort'])
-  additional_info = get_bool(user_prompts['explore-heroes-info'])
-  search_results = [create_row(hero, additional_info) for hero in index.values() if not search_name or compare_string(search_name.lower(), hero.get_name())]
-  if sort_by_overall:
-    search_results.sort(key=lambda hero: hero['overall'], reverse=True)
+  search_results = [ None for hero in index.values() if not search_name or compare_string(search_name.lower(), hero.get_name().lower()) ]
+  print(search_results)
+  if len(search_results) == 0:
+    print('No matches. Try Again')
   else:
-    search_results.sort(key=lambda hero: hero['name'])
+    sort_by_overall = get_bool(user_prompts['explore-heroes-sort'])
+    additional_info = get_bool(user_prompts['explore-heroes-info'])
+    search_results = [create_row(hero, additional_info) for hero in index.values() if not search_name or compare_string(search_name.lower(), hero.get_name().lower())]
+    if sort_by_overall:
+      search_results.sort(key=lambda hero: hero['overall'], reverse=True)
+    else:
+      search_results.sort(key=lambda hero: hero['name'])
   return search_results
 
 # Get hero - view a single hero from the search results

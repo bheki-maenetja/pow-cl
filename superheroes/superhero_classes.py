@@ -13,7 +13,7 @@ class Superhero:
 
   def __init__(self, name, image, powerstats, appearance={}, biography={}, connections={}, work={}):
     self._id = Superhero.hero_id
-    self.name = name.lower()
+    self.name = name
     self.image = image
     self.powerstats = powerstats
     self.__appearance_attrs = list(appearance.keys())
@@ -33,7 +33,7 @@ class Superhero:
     return self._id
 
   def get_name(self):
-    return self.name.lower()
+    return self.name
   
   def get_image(self):
     return self.image
