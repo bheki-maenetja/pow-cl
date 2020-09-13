@@ -6,7 +6,7 @@ from math import inf
 # User Prompts
 user_prompts = {
     "general": "To explore your favourite superheroes, press 'e'. If you want to search for a particular hero press 's'. Or you can check out our nifty comparison tool; just press 'c'. To quit press 'q'",
-    "explore-heroes-info": "Would you like to view your heroes with additional information?",
+    "explore-heroes-info": "Would you like to view additional information about your heroes?",
     "explore-heroes-sort": "Would you like to sort your heroes by the their power levels?",
     "search-heroes": "Search for your favourite superhero or press 0 to go back",
     "get-heroes": "To view a hero enter it's corresponding number or press b to go back"

@@ -16,7 +16,7 @@ def handle_search(index, display_all=False):
       break
     elif user_input == "" and display_all: # Get all heroes - returns all the heroes in a search table
       search_results = simple_search(index)
-      get_search_table(search_results)
+      get_search_table(search_results, len(search_results) == 0)
       super_hero = get_hero(search_results, index)
       if super_hero:
         input("<DISPLAY HERO/>")
@@ -25,7 +25,7 @@ def handle_search(index, display_all=False):
       display_all = False
     else:
       search_results = simple_search(index, user_input)
-      get_search_table(search_results)
+      get_search_table(search_results, len(search_results) == 0)
       if len(search_results) > 0:
         super_hero = get_hero(search_results, index)
         if super_hero: 
@@ -45,7 +45,7 @@ def handle_compare(index):
       break
     else:
       search_results = simple_search(index, user_input)
-      get_search_table(search_results)
+      get_search_table(search_results, len(search_results) == 0)
       superhero = get_hero(search_results, index)
       if superhero:
         input(f"You have chosen {superhero} >>> ")

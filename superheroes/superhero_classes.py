@@ -27,7 +27,7 @@ class Superhero:
     Superhero.hero_id += 1
  
   def __str__(self):
-    return f"{self.name.title()} - (Id: {self._id})"
+    return f"{self.name} - (Id: {self._id})"
   
   def get_id(self):
     return self._id
