@@ -92,8 +92,8 @@ def display_heroes():
     screen.blit(hero_images[0], (WIDTH // 4 - 150, 10))
     screen.blit(hero_images[1], (3 * WIDTH // 4 - 150, 10))
 
-    draw_text(screen, hero_data[0]['name'].title(), 36, WIDTH // 4, 435, align_centre=True)
-    draw_text(screen, hero_data[1]['name'].title(), 36, 3 * WIDTH // 4, 435, align_centre=True)
+    draw_text(screen, hero_data[0]['name'], 36, WIDTH // 4, 435, align_centre=True)
+    draw_text(screen, hero_data[1]['name'], 36, 3 * WIDTH // 4, 435, align_centre=True)
     
     buttons.draw(screen)
     selected_button = next(button for button in buttons if button.is_button_selected())

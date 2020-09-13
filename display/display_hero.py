@@ -97,7 +97,7 @@ def display_hero():
     # Draw / Render
     screen.fill(BACKGROUND_COLOUR)
     screen.blit(hero_image, (WIDTH // 2 - 150, 10))
-    draw_text(screen, hero_data['name'].title(), 36, WIDTH // 2, 435, align_centre=True)
+    draw_text(screen, hero_data['name'], 36, WIDTH // 2, 435, align_centre=True)
     buttons.draw(screen)
     selected_button = next(button for button in buttons if button.is_button_selected())
     render_hero_info(screen, hero_data[selected_button.get_text().lower()])
